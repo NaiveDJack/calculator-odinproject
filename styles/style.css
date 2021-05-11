@@ -1,0 +1,99 @@
+@font-face {
+    font-family: digital;
+    src: url(../assets/fonts/DigitalNumbers-Regular.ttf);
+}
+
+@font-face {
+    font-family: titan;
+    src: url(../assets/fonts/TitanOne-Regular.ttf);
+}
+
+body {
+    background-image: url(../assets/img/wooden-table.jpg);
+}
+
+main {
+    position: fixed;
+    left: 40%;
+    top: 25%;
+
+    width: auto;
+    height: auto;
+    padding: 4px 2px;
+    padding-bottom: 12px;
+
+    background-image: url(../assets/img/steel.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#calc-display {
+    width: 90%;
+    height: auto;
+    padding: 1%;
+    margin: 4%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    font-family: digital;
+
+    background-color: #D5DED0;
+    text-align: right;
+    vertical-align: bottom;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+#result {
+    font-size: x-large;
+}
+
+#calc-keyboard {
+    width: 80%;
+    height: 80%;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 15px;
+    justify-self: center;
+}
+
+#calc-keyboard > div {
+    font-family: titan;
+    width: 90%;
+    height: 90%;
+
+
+    display: inline;
+    text-align: center;
+    align-items: center;
+    font-size: 200%;
+
+    background: radial-gradient(50% 50% at 50% 50%,
+            rgba(73, 72, 47, 0.3) 10.42%,
+            rgba(255, 255, 255, 0) 30.73%,
+            rgba(0, 0, 0, 0.05) 100%), #F6F6F6;
+}
+
+#add {
+    grid-column: 4;
+    grid-row: 2/4;
+    text-align: left !important;
+}
+
+#equals {
+    grid-column: 3/5;
+    text-align: left !important;
+}
+
+#backspace {
+    font-weight: 900;
+}
