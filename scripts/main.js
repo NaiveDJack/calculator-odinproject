@@ -1,4 +1,9 @@
-//@ts-check
+const digits = document.querySelectorAll('.digit')
+display = document.querySelector('#result')
+history = document.querySelector('#operation');
+
+
+//OPERATIONS
 function add (num1, num2) {
 	return num1 + num2
 }
@@ -55,3 +60,12 @@ function operateMultiple (array) {
     }
     
 }
+
+
+
+digits.forEach(element => {
+    element.addEventListener('click', () => {
+        document.getElementById("operation").innerHTML +=
+        element.innerHTML;       
+    })    
+});

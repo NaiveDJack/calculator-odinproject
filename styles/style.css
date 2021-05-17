@@ -71,10 +71,8 @@ main {
     justify-self: center;
 }
 
-#calc-keyboard > div {
+#calc-keyboard > button {
     font-family: titan;
-    width: 40px;
-    height: 53px;
     padding: 0px 12px;
 
 
@@ -86,29 +84,30 @@ main {
 
     background: radial-gradient(50% 50% at 50% 50%,
             rgba(73, 72, 47, 0.3) 10.42%,
-            rgba(255, 255, 255, 0) 30.73%,
+            rgba(255, 255, 255, 0) 35.73%,
             rgba(0, 0, 0, 0.05) 100%), #F6F6F6;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
-#calc-keyboard > div#all-clear {
+#calc-keyboard > button#all-clear {
     font-size: 18pt;
 }
 
-#calc-keyboard > div#add {
+#calc-keyboard > button#add {
     grid-column: 4;
     grid-row: 3/5;
 
-    align-items: center;
+    align-items: left;
     height: 122px;
 }
 
-#calc-keyboard > div#equals {
+#calc-keyboard > button#equals {
     grid-column: 3/5;
-    align-items: center;
+    justify-content: right;
+    padding-right: 22px;
     width: auto;
 }
 
-#calc-keyboard > div#backspace {
+#calc-keyboard > button#backspace {
     font-weight: 900;
 }
