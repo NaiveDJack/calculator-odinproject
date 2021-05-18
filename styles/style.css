@@ -52,8 +52,9 @@ main {
 
     text-align: right;
     vertical-align: bottom;
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: clip;
+    text-overflow: ellipsis;
 }
 
 #result {
