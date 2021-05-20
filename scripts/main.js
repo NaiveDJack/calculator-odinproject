@@ -75,6 +75,8 @@ digits.forEach(element => {
     element.addEventListener('click', () => {
         if (operation.length == 0 && history.innerHTML.length !== 0) {
             clearAll();
+            allClear.addEventListener('click', clearAll)
+        backspace.addEventListener('click', clearLastDigit)
         }
         
         if (!(element.id === "dot" && (display.innerHTML.includes(".")
@@ -90,7 +92,7 @@ digits.forEach(element => {
 operators.forEach(element => {
     element.addEventListener('click', () => {
         if (display.innerHTML.length > 0) {
-            operation.push(parseInt(display.innerHTML), element.innerHTML)
+            operation.push(parseFloat(display.innerHTML), element.innerHTML)
             history.innerHTML += display.innerHTML + element.innerHTML
             display.innerHTML = ""
         }
@@ -99,10 +101,15 @@ operators.forEach(element => {
 
 equals.addEventListener('click', () => {
     if (display.innerHTML.length > 0 & history.innerHTML.length > 0) {
-        operation.push(parseInt(display.innerHTML))
+        operation.push(parseFloat(display.innerHTML))
+        
         history.innerHTML += display.innerHTML + "="
         display.innerHTML = operateMultiple(operation)
+        
         operation.splice(0, operation.length)
+
+        allClear.removeEventListener('click', clearAll)
+        backspace.removeEventListener('click', clearLastDigit)
     }
     
 })
