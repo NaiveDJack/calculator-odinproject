@@ -10,7 +10,6 @@ const operation = []
 
 //OPERATIONS
 function add (num1, num2) {
-	console.log(num1 + num2)
     return num1 + num2
 }
 
@@ -69,37 +68,32 @@ function operateMultiple (array) {
 }
 
 
-//CALCULATOR BUTTONS LOGIC
+//CALCULATOR LOGIC FUNCTIONS
 
-digits.forEach(element => {
-    element.addEventListener('click', () => {
-        if (operation.length == 0 && history.innerHTML.length !== 0) {
-            clearAll();
-            allClear.addEventListener('click', clearAll)
+function addDigit(e) {
+    if (operation.length == 0 && history.innerHTML.length !== 0) {
+        clearAll();
+        allClear.addEventListener('click', clearAll)
         backspace.addEventListener('click', clearLastDigit)
-        }
-        
-        if (!(element.id === "dot" && (display.innerHTML.includes(".")
-                || display.innerHTML.length == 0)))
-        {
-            display.innerHTML +=
-            element.innerHTML; 
-        }
-              
-    })    
-});
+    }
+    
+    if (!(this.id === "dot" && (display.innerHTML.includes(".")
+            || display.innerHTML.length == 0)))
+    {
+        display.innerHTML +=
+        this.innerHTML; 
+    }
+}
 
-operators.forEach(element => {
-    element.addEventListener('click', () => {
-        if (display.innerHTML.length > 0) {
-            operation.push(parseFloat(display.innerHTML), element.innerHTML)
-            history.innerHTML += display.innerHTML + element.innerHTML
-            display.innerHTML = ""
-        }
-    })
-})
+function addOperator(e) {
+    if (display.innerHTML.length > 0) {
+        operation.push(parseFloat(display.innerHTML), this.innerHTML)
+        history.innerHTML += display.innerHTML + this.innerHTML
+        display.innerHTML = ""
+    }
+}
 
-equals.addEventListener('click', () => {
+function solveOperation(e) {   
     if (display.innerHTML.length > 0 & history.innerHTML.length > 0) {
         operation.push(parseFloat(display.innerHTML))
         
@@ -110,13 +104,8 @@ equals.addEventListener('click', () => {
 
         allClear.removeEventListener('click', clearAll)
         backspace.removeEventListener('click', clearLastDigit)
-    }
-    
-})
-
-allClear.addEventListener('click', clearAll)
-backspace.addEventListener('click', clearLastDigit)
-
+    } 
+}
 
 function clearLastDigit() {
     display.innerHTML = display.innerHTML.slice(0, - 1);
@@ -127,3 +116,18 @@ function clearAll() {
     history.innerHTML = ""
     display.innerHTML = ""
 }
+
+//CALCULATOR BUTTON EVENT LISTENERS
+
+digits.forEach(element => {
+    element.addEventListener('click', addDigit)
+    //TODO: add keydown eventlistener    
+});
+
+operators.forEach(element => {
+    element.addEventListener('click', addOperator)
+})
+
+equals.addEventListener('click', solveOperation)
+allClear.addEventListener('click', clearAll)
+backspace.addEventListener('click', clearLastDigit)
