@@ -70,62 +70,100 @@ function operateMultiple (array) {
 
 //CALCULATOR LOGIC FUNCTIONS
 
-function addDigit(e) {
+function convertDigit() {
+    addDigit(this.innerHTML);
+}
+
+function convertOperator() {
+    addOperator(this.innerHTML);
+}
+
+function addDigit(digit) {
     if (operation.length == 0 && history.innerHTML.length !== 0) {
         clearAll();
-        allClear.addEventListener('click', clearAll)
-        backspace.addEventListener('click', clearLastDigit)
     }
     
-    if (!(this.id === "dot" && (display.innerHTML.includes(".")
+    if (!(digit === "." && (display.innerHTML.includes(".")
             || display.innerHTML.length == 0)))
     {
         display.innerHTML +=
-        this.innerHTML; 
+        digit; 
     }
 }
 
-function addOperator(e) {
+function addOperator(operator) {
     if (display.innerHTML.length > 0) {
-        operation.push(parseFloat(display.innerHTML), this.innerHTML)
-        history.innerHTML += display.innerHTML + this.innerHTML
+        operation.push(parseFloat(display.innerHTML), operator)
+        history.innerHTML += display.innerHTML + operator
         display.innerHTML = ""
     }
 }
 
-function solveOperation(e) {   
-    if (display.innerHTML.length > 0 & history.innerHTML.length > 0) {
+function solveOperation() {   
+    if (display.innerHTML.length > 0 &
+        history.innerHTML.length > 0 &
+        !(history.innerHTML.slice(-1) === "=")) {
         operation.push(parseFloat(display.innerHTML))
         
         history.innerHTML += display.innerHTML + "="
         display.innerHTML = operateMultiple(operation)
         
         operation.splice(0, operation.length)
-
-        allClear.removeEventListener('click', clearAll)
-        backspace.removeEventListener('click', clearLastDigit)
     } 
 }
 
 function clearLastDigit() {
-    display.innerHTML = display.innerHTML.slice(0, - 1);
+    if (!(history.innerHTML.slice(-1) === "=")) {
+        display.innerHTML = display.innerHTML.slice(0, - 1);
+    }   
 }
 
 function clearAll() {
-    operation.splice(0, operation.length)
-    history.innerHTML = ""
-    display.innerHTML = ""
+    if (display.innerHTML.length > 0 ||
+        history.innerHTML.length > 0) {
+
+            operation.splice(0, operation.length)
+            history.innerHTML = ""
+            display.innerHTML = ""
+    }
+    
 }
 
 //CALCULATOR BUTTON EVENT LISTENERS
 
+window.addEventListener('keydown', function(e) {
+        if (e.key >= 0 || e.key === '.') {
+            addDigit(e.key)
+        }
+        
+        if (e.key === 'Enter') {
+            solveOperation()
+        }
+
+        if (e.key === '+'||
+            e.key === '-'||
+            e.key === '*'||
+            e.key === '/') {
+            e.preventDefault();
+            addOperator(e.key)
+        }
+
+        if (e.key === 'Backspace') {
+            clearLastDigit()
+        }
+
+        if (e.key === 'Delete') {
+            clearAll()
+        }
+    })
+
+  
 digits.forEach(element => {
-    element.addEventListener('click', addDigit)
-    //TODO: add keydown eventlistener    
+    element.addEventListener('click', convertDigit)   
 });
 
 operators.forEach(element => {
-    element.addEventListener('click', addOperator)
+    element.addEventListener('click', convertOperator)
 })
 
 equals.addEventListener('click', solveOperation)
