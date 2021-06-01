@@ -8,14 +8,25 @@
     src: url(../assets/fonts/TitanOne-Regular.ttf);
 }
 
+html {
+    width: 100%;
+    height: 100%;
+}
+
 body {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+
     background-image: url(../assets/img/wooden-table.jpg);
 }
 
 main {
-    position: fixed;
-    left: 40%;
-    top: 25%;
+    align-self: center;
 
     width: 334px;
     height: 442px;
@@ -117,4 +128,26 @@ main {
 
 #calc-keyboard > button#backspace {
     font-weight: 900;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+
+    background-color: rgb(187, 197, 170);
+}
+
+header {
+    width: 100%;
+    text-align: center;
+
+    padding: 12px;
+
+    background-color: rgb(187, 197, 170);
+}
+
+h1 {
+    font-size: x-large;
+    font-weight: bolder;
 }
